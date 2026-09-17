@@ -1,0 +1,8 @@
+*.class
+*.o
+*.exe
+target/
+build/
+bin/
+.idea/
+*.jar
