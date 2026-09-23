@@ -1,0 +1,198 @@
+{
+  "personas": [
+    {
+      "id": "P01",
+      "nombre": "Antonio",
+      "sexo": "M"
+    },
+    {
+      "id": "P02",
+      "nombre": "Elena",
+      "sexo": "F"
+    },
+    {
+      "id": "P03",
+      "nombre": "Carlos",
+      "sexo": "M"
+    },
+    {
+      "id": "P04",
+      "nombre": "Maria",
+      "sexo": "F"
+    },
+    {
+      "id": "P05",
+      "nombre": "Jorge",
+      "sexo": "M"
+    },
+    {
+      "id": "P06",
+      "nombre": "Sofia",
+      "sexo": "F"
+    },
+    {
+      "id": "P07",
+      "nombre": "Luis",
+      "sexo": "M"
+    },
+    {
+      "id": "P08",
+      "nombre": "Ana",
+      "sexo": "F"
+    },
+    {
+      "id": "P09",
+      "nombre": "Pedro",
+      "sexo": "M"
+    },
+    {
+      "id": "P10",
+      "nombre": "Laura",
+      "sexo": "F"
+    },
+    {
+      "id": "P11",
+      "nombre": "Diego",
+      "sexo": "M"
+    },
+    {
+      "id": "P12",
+      "nombre": "Claudia",
+      "sexo": "F"
+    },
+    {
+      "id": "P13",
+      "nombre": "Miguel",
+      "sexo": "M"
+    },
+    {
+      "id": "P14",
+      "nombre": "Paula",
+      "sexo": "F"
+    },
+    {
+      "id": "P15",
+      "nombre": "Tomas",
+      "sexo": "M"
+    },
+    {
+      "id": "P16",
+      "nombre": "Valentina",
+      "sexo": "F"
+    }
+  ],
+  "padres": [
+    {
+      "padre": "P01",
+      "hijo": "P03"
+    },
+    {
+      "padre": "P02",
+      "hijo": "P03"
+    },
+    {
+      "padre": "P01",
+      "hijo": "P04"
+    },
+    {
+      "padre": "P02",
+      "hijo": "P04"
+    },
+    {
+      "padre": "P03",
+      "hijo": "P05"
+    },
+    {
+      "padre": "P04",
+      "hijo": "P05"
+    },
+    {
+      "padre": "P03",
+      "hijo": "P06"
+    },
+    {
+      "padre": "P04",
+      "hijo": "P06"
+    },
+    {
+      "padre": "P05",
+      "hijo": "P07"
+    },
+    {
+      "padre": "P06",
+      "hijo": "P07"
+    },
+    {
+      "padre": "P05",
+      "hijo": "P08"
+    },
+    {
+      "padre": "P06",
+      "hijo": "P08"
+    },
+    {
+      "padre": "P07",
+      "hijo": "P09"
+    },
+    {
+      "padre": "P08",
+      "hijo": "P09"
+    },
+    {
+      "padre": "P07",
+      "hijo": "P10"
+    },
+    {
+      "padre": "P08",
+      "hijo": "P10"
+    },
+    {
+      "padre": "P09",
+      "hijo": "P11"
+    },
+    {
+      "padre": "P10",
+      "hijo": "P11"
+    },
+    {
+      "padre": "P09",
+      "hijo": "P12"
+    },
+    {
+      "padre": "P10",
+      "hijo": "P12"
+    },
+    {
+      "padre": "P11",
+      "hijo": "P13"
+    },
+    {
+      "padre": "P12",
+      "hijo": "P13"
+    },
+    {
+      "padre": "P11",
+      "hijo": "P14"
+    },
+    {
+      "padre": "P12",
+      "hijo": "P14"
+    },
+    {
+      "padre": "P13",
+      "hijo": "P15"
+    },
+    {
+      "padre": "P14",
+      "hijo": "P15"
+    },
+    {
+      "padre": "P13",
+      "hijo": "P16"
+    },
+    {
+      "padre": "P14",
+      "hijo": "P16"
+    }
+  ]
+}
