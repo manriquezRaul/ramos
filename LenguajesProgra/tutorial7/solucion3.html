@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Solución 3 Tabla Dinámica</title>
+    <link rel="stylesheet" href="manriquez.css">
+    <script>
+        function generaTabla() {
+            const elDiv = document.getElementById("otraTabla");
+            const filas = parseInt(document.getElementById("filas").value);
+            const columnas = parseInt(document.getElementById("columnas").value);
+            elDiv.innerHTML = "";
+            const latabla = document.createElement('table');
+            
+            for (let i = 0; i < filas; i++) {
+                const fila = document.createElement('tr');
+                for (let j = 0; j < columnas; j++) {
+                    const celda = document.createElement('td');
+                    const color = calcularColor(i, j, filas, columnas);
+                    celda.style.backgroundColor = color;
+                    celda.style.width = "10px";
+                    celda.style.height = "10px";
+                    fila.appendChild(celda);
+                }
+                latabla.appendChild(fila);
+            }
+            elDiv.appendChild(latabla);
+        }
+
+        function calcularColor(fila, columna, totf, totc) {
+            const r = Math.floor((fila / totf) * 255);
+            const g = Math.floor((columna / totc) * 255);
+            const b = 128;
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+    </script>
+</head>
+<body>
+    <h3 class="titulo3">Tabla dinámica</h3>
+    <hr>
+    <table>
+        <tr>
+            <td>filas</td>
+            <td>
+                <input id="filas" type="text" value="10">
+            </td>
+        </tr>
+        <tr>
+            <td>columnas</td>
+            <td>
+                <input id="columnas" type="text" value="10">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button type="button" onclick="generaTabla()">
+                    Genera
+                </button>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <div id="otraTabla"></div>
+</body>
+</html>

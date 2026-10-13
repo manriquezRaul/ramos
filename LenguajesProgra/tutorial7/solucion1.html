@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Solución 1 </title>
+</head>
+<body>
+    <h1>Título Principal</h1>
+    <h3 style="background-color:#9090DD">Título Secundario</h3>
+    <hr>
+    
+    <div id="tempestad" style="background-color:#e2e290; color: blue; margin:20px; padding-left: 10px; max-width:300px">
+        "O, wonder! <br>
+        How many goodly creatures are there here!<br>
+        How beauteous mankind is! O brave new world<br>
+        That has such people in 't!"<br>
+    </div>
+    
+    <button type="button" id="btn_idioma" onclick="cambiaIdioma()">
+        A español
+    </button>
+
+    <script>
+        function cambiaIdioma() {
+            var elBoton = document.getElementById("btn_idioma");
+            var elParrafo = document.getElementById("tempestad");
+
+            // Verifica el estado actual según el texto del botón para alternar
+            if (elBoton.innerHTML.trim() === "A español") {
+                elParrafo.innerHTML = '"¡Oh, maravilla!<br>' +
+                                      '¡Cuántas criaturas bellas hay aquí!<br>' +
+                                      '¡Cuán hermosa es la humanidad! ¡Oh, valeroso mundo nuevo<br>' +
+                                      'que tiene tal gente en el!"<br>';
+                elBoton.innerHTML = "To English";
+            } else {
+                elParrafo.innerHTML = '"O, wonder! <br>' +
+                                      'How many goodly creatures are there here!<br>' +
+                                      'How beauteous mankind is! O brave new world<br>' +
+                                      'That has such people in \'t!"<br>';
+                elBoton.innerHTML = "A español";
+            }
+        }
+    </script>
+</body>
+</html>
