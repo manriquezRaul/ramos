@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Taller 7 </title>
+    <script>
+        const TAMANO = 15;
+        const CANTIDAD_MINAS = 30;
+        const TAMANO_CELDA = "20px";
+
+        function generarTablero() {
+            const elDiv = document.getElementById("tableroMina");
+            elDiv.innerHTML = "";
+            let minas = [];
+            while (minas.length < CANTIDAD_MINAS) {
+                let filaRandom = Math.floor(Math.random() * TAMANO);
+                let colRandom = Math.floor(Math.random() * TAMANO);
+                let coordenada = filaRandom + "," + colRandom;
+
+                if (!minas.includes(coordenada)) {
+                    minas.push(coordenada);
+                }
+            }
+
+            console.log("Coordenadas de minas:", minas);
+
+            const latabla = document.createElement('table');
+            latabla.style.borderCollapse = "collapse";
+
+            for (let i = 0; i < TAMANO; i++) {
+                const fila = document.createElement('tr');
+                for (let j = 0; j < TAMANO; j++) {
+                    const celda = document.createElement('td');
+                    celda.style.width = TAMANO_CELDA;
+                    celda.style.height = TAMANO_CELDA;
+                    celda.style.border = "1px solid #999";
+                    celda.style.textAlign = "center";
+                    celda.style.verticalAlign = "middle";
+                    celda.style.fontSize = "12px";
+
+                    let actual = i + "," + j;
+                    if (minas.includes(actual)) {
+                        celda.innerHTML = "&#x1F6A9;"; 
+                    }
+
+                    fila.appendChild(celda);
+                }
+                latabla.appendChild(fila);
+            }
+            elDiv.appendChild(latabla);
+        }
+    </script>
+</head>
+<body onload="generarTablero()">
+    <h3 class="titulo3">Buscaminas - Parte 1</h3>
+    <hr>
+    <div id="tableroMina"></div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Taller 7 </title>
+    <style>
+        #infoJuego {
+            margin-bottom: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+    </style>
+    <script>
+        const TAMANO = 15;
+        const CANTIDAD_MINAS = 30;
+        const TAMANO_CELDA = "20px";
+        let modoAccion = "despeja"; 
+        let mat = [];
+        let minas = [];
+        let errores = 0;
+        let juegoTerminado = false;
+
+        function opcionSeleccionada(evento) {
+            modoAccion = evento.target.value;
+            console.log("Acción seleccionada:", modoAccion);
+        }
+
+        function generarTablero() {
+            const elDiv = document.getElementById("tableroMina");
+            elDiv.innerHTML = "";
+            errores = 0;
+            juegoTerminado = false;
+            document.getElementById("contadorErrores").innerText = errores;
+
+            minas = [];
+            while (minas.length < CANTIDAD_MINAS) {
+                let r = Math.floor(Math.random() * TAMANO);
+                let c = Math.floor(Math.random() * TAMANO);
+                let coord = r + "," + c;
+                if (!minas.includes(coord)) minas.push(coord);
+            }
+
+            mat = Array(TAMANO).fill(0).map(() => Array(TAMANO).fill(0));
+            minas.forEach(coord => {
+                let partes = coord.split(",");
+                mat[parseInt(partes[0])][parseInt(partes[1])] = -1;
+            });
+
+            for (let i = 0; i < TAMANO; i++) {
+                for (let j = 0; j < TAMANO; j++) {
+                    if (mat[i][j] === -1) continue;
+                    let vecinas = 0;
+                    for (let di = -1; di <= 1; di++) {
+                        for (let dj = -1; dj <= 1; dj++) {
+                            if (di === 0 && dj === 0) continue;
+                            let ni = i + di, nj = j + dj;
+                            if (ni >= 0 && ni < TAMANO && nj >= 0 && nj < TAMANO) {
+                                if (mat[ni][nj] === -1) vecinas++;
+                            }
+                        }
+                    }
+                    mat[i][j] = vecinas;
+                }
+            }
+
+            console.log("Coordenadas de minas:", minas);
+            console.log("Matriz del tablero (mat):", mat);
+
+            const latabla = document.createElement('table');
+            latabla.style.borderCollapse = "collapse";
+
+            for (let i = 0; i < TAMANO; i++) {
+                const fila = document.createElement('tr');
+                for (let j = 0; j < TAMANO; j++) {
+                    const celda = document.createElement('td');
+                    celda.style.width = TAMANO_CELDA;
+                    celda.style.height = TAMANO_CELDA;
+                    celda.style.border = "1px solid #999";
+                    celda.style.textAlign = "center";
+                    celda.style.verticalAlign = "middle";
+                    celda.style.fontSize = "12px";
+                    celda.style.fontWeight = "bold";
+                    celda.style.backgroundColor = "#ccc";
+                    celda.dataset.fila = i;
+                    celda.dataset.col = j;
+
+                    celda.onclick = function() {
+                        manejarClicCell(this, i, j);
+                    };
+
+                    fila.appendChild(celda);
+                }
+                latabla.appendChild(fila);
+            }
+            elDiv.appendChild(latabla);
+        }
+
+        function manejarClicCell(celda, i, j) {
+            if (juegoTerminado) return;
+
+            if (modoAccion === "marca") {
+                if (celda.innerHTML === "") {
+                    celda.innerHTML = "&#x1F6A9;";
+                    celda.style.backgroundColor = "#fff";
+                } else if (celda.innerHTML === "🚩") {
+                    celda.innerHTML = "";
+                    celda.style.backgroundColor = "#ccc";
+                }
+            } else if (modoAccion === "despeja") {
+                if (celda.innerHTML === "🚩") return;
+
+                celda.style.backgroundColor = "#fff";
+                if (mat[i][j] === -1) {
+                    celda.innerHTML = "&#x1F4A3;"; // Bomba / Mina
+                    celda.style.backgroundColor = "#ff9999";
+                    errores++;
+                    document.getElementById("contadorErrores").innerText = errores;
+                    console.log("¡Has pisado una mina! Errores totales:", errores);
+                } else if (mat[i][j] > 0) {
+                    celda.innerHTML = mat[i][j];
+                    if (mat[i][j] === 1) celda.style.color = "blue";
+                    else if (mat[i][j] === 2) celda.style.color = "green";
+                    else celda.style.color = "red";
+                } else {
+                    celda.innerHTML = ""; 
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="generarTablero()">
+    <h3 class="titulo3">Buscaminas - Parte 4 (Final)</h3>
+    <hr>
+    
+    <div id="infoJuego">
+        <label for="acciones"><strong>Acción:</strong></label>
+        <select id="acciones" onchange="opcionSeleccionada(event)">
+            <option value="despeja" selected>Despeja</option>
+            <option value="marca">Marca</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        <span><strong>Errores (Minas pisadas):</strong> <span id="contadorErrores" style="color: red; font-weight: bold;">0</span></span>
+    </div>
+
+    <div id="tableroMina"></div>
+</body>
+</html>

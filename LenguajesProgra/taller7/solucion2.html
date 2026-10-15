@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Taller 7 </title>
+    <script>
+        const TAMANO = 15;
+        const CANTIDAD_MINAS = 30;
+        const TAMANO_CELDA = "20px";
+
+        function generarTablero() {
+            const elDiv = document.getElementById("tableroMina");
+            elDiv.innerHTML = "";
+            let minas = [];
+            while (minas.length < CANTIDAD_MINAS) {
+                let filaRandom = Math.floor(Math.random() * TAMANO);
+                let colRandom = Math.floor(Math.random() * TAMANO);
+                let coordenada = filaRandom + "," + colRandom;
+
+                if (!minas.includes(coordenada)) {
+                    minas.push(coordenada);
+                }
+            }
+            let mat = Array(TAMANO).fill(0).map(() => Array(TAMANO).fill(0));
+
+            minas.forEach(coord => {
+                let partes = coord.split(",");
+                let r = parseInt(partes[0]);
+                let c = parseInt(partes[1]);
+                mat[r][c] = -1;
+            });
+
+            for (let i = 0; i < TAMANO; i++) {
+                for (let j = 0; j < TAMANO; j++) {
+                    if (mat[i][j] === -1) continue;
+
+                    let vecinas = 0;
+                    for (let di = -1; di <= 1; di++) {
+                        for (let dj = -1; dj <= 1; dj++) {
+                            if (di === 0 && dj === 0) continue;
+                            let ni = i + di;
+                            let nj = j + dj;
+                            if (ni >= 0 && ni < TAMANO && nj >= 0 && nj < TAMANO) {
+                                if (mat[ni][nj] === -1) {
+                                    vecinas++;
+                                }
+                            }
+                        }
+                    }
+                    mat[i][j] = vecinas;
+                }
+            }
+
+            console.log("Coordenadas de minas:", minas);[cite: 11, 12]
+            console.log("Matriz del tablero (mat):", mat);[cite: 12]
+
+            const latabla = document.createElement('table');
+            latabla.style.borderCollapse = "collapse";
+
+            for (let i = 0; i < TAMANO; i++) {
+                const fila = document.createElement('tr');
+                for (let j = 0; j < TAMANO; j++) {
+                    const celda = document.createElement('td');
+                    celda.style.width = TAMANO_CELDA;
+                    celda.style.height = TAMANO_CELDA;
+                    celda.style.border = "1px solid #999";
+                    celda.style.textAlign = "center";
+                    celda.style.verticalAlign = "middle";
+                    celda.style.fontSize = "12px";
+                    celda.style.fontWeight = "bold";
+
+                    if (mat[i][j] === -1) {
+                        celda.innerHTML = "&#x1F6A9;"; 
+                    } else if (mat[i][j] > 0) {
+                        celda.innerHTML = mat[i][j]; 
+                        if (mat[i][j] === 1) celda.style.color = "blue";
+                        else if (mat[i][j] === 2) celda.style.color = "green";
+                        else if (mat[i][j] >= 3) celda.style.color = "red";
+                    } else {
+                        celda.innerHTML = "";
+                    }
+
+                    fila.appendChild(celda);
+                }
+                latabla.appendChild(fila);
+            }
+            elDiv.appendChild(latabla);
+        }
+    </script>
+</head>
+<body onload="generarTablero()">
+    <h3 class="titulo3">Buscaminas - Parte 2</h3>
+    <hr>
+    <div id="tableroMina"></div>
+</body>
+</html>
